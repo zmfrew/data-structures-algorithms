@@ -62,3 +62,8 @@ print("After appending 3 to list2")
 list2.append(3)
 print("List1: \(list1)")
 print("List2: \(list2)")
+
+
+print(list)
+list.reverse()
+print(list)

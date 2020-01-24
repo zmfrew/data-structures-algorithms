@@ -121,6 +121,17 @@ public struct LinkedList<Value> {
         
         return current.value
     }
+    
+    public mutating func reverse() {
+        copyNodes()
+        
+        var list = LinkedList<Value>()
+        for i in self {
+            list.push(i)
+        }
+        
+        self = list
+    }
 }
 
 extension LinkedList: CustomStringConvertible {
