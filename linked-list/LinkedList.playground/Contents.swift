@@ -67,3 +67,22 @@ print("List2: \(list2)")
 print(list)
 list.reverse()
 print(list)
+
+print(list.middle()?.value) 
+
+
+var sortedList1 = LinkedList<Int>()
+sortedList1.append(1)
+sortedList1.append(4)
+sortedList1.append(10)
+sortedList1.append(11)
+var sortedList2 = LinkedList<Int>()
+sortedList2.append(1)
+sortedList2.append(2)
+sortedList2.append(3)
+sortedList2.append(6)
+
+print(sortedList1)
+print(sortedList2)
+let sorted = LinkedList.merge(sortedList1, sortedList2)
+print(sorted)

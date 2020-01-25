@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LinkedList<Value> {
+public struct LinkedList<Value: Comparable> {
     public var head: Node<Value>?
     public var tail: Node<Value>?
     
@@ -51,6 +51,53 @@ public struct LinkedList<Value> {
         return node.next!
     }
     
+    public static func merge(_ list1: LinkedList<Value>, _ list2: LinkedList<Value>) -> LinkedList<Value>? {
+        guard !list1.isEmpty, !list2.isEmpty else { return nil }
+        
+        var longer = list1.count > list2.count ? list1 : list2
+        var shorter = list1.count > list2.count ? list2 : list1
+        
+        while let value = shorter.pop() {
+            var placed = false
+            var current = longer.head!
+            var previous = longer.head!
+            
+            while value > current.value {
+                if current.next == nil {
+                    longer.append(value)
+                    placed = true
+                    break
+                }
+                
+                previous = current
+                current = current.next!
+            }
+            
+            if !placed {
+                if value == current.value {
+                    longer.push(value)
+                    continue
+                }
+                
+                longer.insert(value, after: previous)
+            }
+        }
+        
+        return longer
+    }
+    
+    public func middle() -> Node<Value>? {
+        var slow = head
+        var fast = head
+        
+        while fast != nil && fast?.next != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        
+        return slow
+    }
+    
     public func node(at index: Int) -> Node<Value>? {
         var currentNode = head
         var currentIndex = 0
@@ -65,13 +112,14 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func pop() -> Value? {
-        copyNodes()
-        
-        head = head?.next
-        
-        if isEmpty {
-            tail = nil
+        defer {
+            head = head?.next
+            
+            if isEmpty {
+                tail = nil
+            }
         }
+        copyNodes()
         
         return head?.value
     }
