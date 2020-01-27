@@ -146,7 +146,6 @@ public struct LinkedList<Value: Comparable> {
         }
         
         return node.next?.value
-        
     }
     
     @discardableResult
@@ -170,6 +169,29 @@ public struct LinkedList<Value: Comparable> {
         return current.value
     }
     
+    @discardableResult
+    public mutating func removeOccurrences(of element: Value) {
+        var previous = head
+        var current = head?.next
+        while let currentNode = current {
+            guard currentNode.value != element else {
+                previous?.next = currentNode.next
+                current = previous?.next
+                continue
+            }
+            
+            previous = current
+            current = current?.next
+        }
+        
+        tail = previous
+    }
+    
+    public func printReversed(_ node: Node<Value>?) {
+        guard let node = node else { return }
+        printReversed(node.next)
+    }
+    
     public mutating func reverse() {
         copyNodes()
         
@@ -178,7 +200,7 @@ public struct LinkedList<Value: Comparable> {
             list.push(i)
         }
         
-        self = list
+        head = list.head
     }
 }
 

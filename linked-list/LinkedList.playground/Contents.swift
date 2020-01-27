@@ -68,7 +68,7 @@ print(list)
 list.reverse()
 print(list)
 
-print(list.middle()?.value) 
+print(list.middle()!.value)
 
 
 var sortedList1 = LinkedList<Int>()
@@ -84,5 +84,16 @@ sortedList2.append(6)
 
 print(sortedList1)
 print(sortedList2)
-let sorted = LinkedList.merge(sortedList1, sortedList2)
+let sorted = LinkedList.merge(sortedList1, sortedList2)!
 print(sorted)
+
+
+var listToRemove = LinkedList<Int>()
+listToRemove.append(1)
+listToRemove.append(3)
+listToRemove.append(3)
+listToRemove.append(3)
+listToRemove.append(4)
+print("before removing: \(listToRemove)")
+listToRemove.removeOccurrences(of: 3)
+print("after removing: \(listToRemove)")
