@@ -14,3 +14,15 @@ print(stack2)
 
 let stack3: Stack = ["stack", "a", "is", "this"]
 print(stack3)
+
+
+// ------------------------------------------------------------------------
+// Challenge 1
+// print linked list in reverse w/o recursion
+var linkedList = LinkedList<Int>()
+Array(1...10).forEach { linkedList.append($0) }
+print(linkedList)
+linkedList.reverse()
+print(linkedList)
+// Challenge 2
+// check for balanced parentheses using stack
