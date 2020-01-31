@@ -26,3 +26,12 @@ linkedList.reverse()
 print(linkedList)
 // Challenge 2
 // check for balanced parentheses using stack
+// 1
+let str1 = "h((e))llo(world)()" // balanced parentheses
+let strStack1 = Stack(str1.map({ "\($0)" }))
+assert(strStack1.hasBalancedParentheses == true)
+
+// 2
+let str2 = "(hello world" // unbalanced parentheses
+let strStack2 = Stack(str2.map({ "\($0)" }))
+assert(strStack2.hasBalancedParentheses == false)

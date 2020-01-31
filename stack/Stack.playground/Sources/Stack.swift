@@ -33,3 +33,14 @@ extension Stack: ExpressibleByArrayLiteral {
         storage = elements
     }
 }
+
+extension Stack where Element == String {
+    public var hasBalancedParentheses: Bool {
+        guard storage.contains("(") && storage.contains(")") else { return false }
+        
+        let opening = storage.filter { $0 == "(" }
+        let closing = storage.filter { $0 == ")" }
+        
+        return opening.count == closing.count
+    }
+}
