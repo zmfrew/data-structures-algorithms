@@ -46,3 +46,34 @@ extension TreeNode where T: Equatable {
         return result
     }
 }
+
+
+// Challenge 1: print tree values in order of level
+/* i.e.
+ 15
+ 1 17 20
+ 1 5 0 2 5 7
+ */
+
+extension TreeNode {
+    public func prettyPrint(_ node: TreeNode<T>) {
+        var queue = Queue<TreeNode<T>>()
+        var nodesInLevel = 0
+        queue.enqueue(node)
+        
+        while !queue.isEmpty {
+            nodesInLevel = queue.count
+            
+            while nodesInLevel > 0 {
+                guard let node = queue.dequeue() else { break }
+                
+                print("\(node.value)", terminator: " ")
+                node.children.forEach { queue.enqueue($0) }
+                
+                nodesInLevel -= 1
+            }
+            
+            print()
+        }
+    }
+}

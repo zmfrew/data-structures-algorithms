@@ -52,4 +52,5 @@ print("-------------------------")
 print(tree.search("ginger ale") != nil ? "Found it!" : "No results")
 print(tree.search("WKD Blue") != nil ? "Found it!" : "No results")
 print("-------------------------")
-tree.prettyPrint()
+
+tree.prettyPrint(tree)
