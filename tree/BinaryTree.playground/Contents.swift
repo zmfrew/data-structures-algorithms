@@ -21,3 +21,10 @@ print("---------------------\n")
 tree.traversePreOrder { print($0) }
 print("---------------------\n")
 tree.traversePostOrder { print($0) }
+print("Challenge 1---------------------\n")
+print("height of tree: \(height(of: tree))")
+print("Challenge 2---------------------\n")
+var array = serialize(tree)
+print(array)
+let node = deserialize(&array)
+print(node!)
