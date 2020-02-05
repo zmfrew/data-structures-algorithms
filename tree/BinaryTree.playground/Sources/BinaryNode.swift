@@ -30,3 +30,29 @@ extension BinaryNode: CustomStringConvertible {
                            bottom + "│ ", bottom + "└──", bottom + " ")
     }
 }
+
+extension BinaryNode {
+    public func traverseInOrder(visit: (Element) -> Void) {
+        leftChild?.traverseInOrder(visit: visit)
+        visit(value)
+        rightChild?.traverseInOrder(visit: visit)
+    }
+}
+
+extension BinaryNode {
+    public func traversePreOrder(visit: (Element) -> Void) {
+        visit(value)
+        leftChild?.traverseInOrder(visit: visit)
+        rightChild?.traverseInOrder(visit: visit)
+    }
+}
+
+extension BinaryNode {
+    public func traversePostOrder(visit: (Element) -> Void) {
+        leftChild?.traverseInOrder(visit: visit)
+        rightChild?.traverseInOrder(visit: visit)
+        visit(value)
+    }
+}
+
+
