@@ -96,3 +96,53 @@ extension BinarySearchTree {
         return node
     }
 }
+
+// BST Challenge 1 - create a function to check if a binary tree is a bst.
+extension BinaryNode where Element: Comparable {
+    var isBinarySearchTree: Bool { isBST(self, min: nil, max: nil) }
+    
+    private func isBST(_ node: BinaryNode<Element>?, min: Element?, max: Element?) -> Bool {
+        guard let node = node else { return true }
+        
+        if let min = min, node.value <= min {
+            return false
+        } else if let max = max, node.value > max {
+            return false
+        }
+        
+        return isBST(node.leftChild, min: min, max: node.value) && isBST(node.rightChild, min: node.value, max: max)
+    }
+}
+
+// BST Challenge 2 - conform to Equatable.
+extension BinarySearchTree: Equatable {
+    public static func == (lhs: BinarySearchTree, rhs: BinarySearchTree) -> Bool {
+        return isEqual(lhs.root, rhs.root)
+    }
+    
+    private static func isEqual<Element: Equatable>(_ node1: BinaryNode<Element>?, _ node2: BinaryNode<Element>?) -> Bool {
+        guard let left = node1, let right = node2 else {
+            return node1 == nil && node2 == nil
+        }
+        
+        return left.value == right.value &&
+            isEqual(left.leftChild, right.leftChild) &&
+            isEqual(left.rightChild, right.rightChild)
+    }
+}
+
+// BST Challenge 3 - check if current tree contains all elements of another tree.
+extension BinarySearchTree where Element: Hashable {
+    public func contains(_ subtree: BinarySearchTree) -> Bool {
+        var set: Set<Element> = []
+        root?.traverseInOrder { set.insert($0) }
+        
+        var isEqual = true
+        
+        subtree.root?.traverseInOrder {
+            isEqual = isEqual && set.contains($0)
+        }
+        
+        return isEqual
+    }
+}
